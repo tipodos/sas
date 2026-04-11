@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+            $table->decimal('costo', 8, 2);
             $table->decimal('precio', 8, 2);
+            $table->decimal('precio_mayoreo',8,2)->nullable();
             $table->integer('stock');
-            $table->foreignId('category_id')->constrained('categories'); // Relación con categoría
+            $table->integer('visible')->default(1); // 1 para visible, 0 para no visible
+            $table->foreignId('category_id')->constrained('categories'); // Relación con categorías
             $table->timestamps();
         });
     }

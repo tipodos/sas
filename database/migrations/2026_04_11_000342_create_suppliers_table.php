@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('personals', function (Blueprint $table) {
+        Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('dni');  
-            $table->integer('estado')->default(1); // 1 para activo, 0 para inactivo
+            $table->string('ruc',11)->unique()->nullable();
+            $table->string('nombre');
+            $table->string('telefono',15)->nullable();
+            $table->string('direccion')->nullable();
+            $table->integer('estado')->default(1); // 1: Activo, 0: Inactivo
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('personals');
+        Schema::dropIfExists('suppliers');
     }
 };

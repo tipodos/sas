@@ -63,7 +63,7 @@
                                                         class="btn btn-sm btn-outline-success">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <form action="{{ route('categoria.delete', $cat->id) }}" method="POST"
+                                                    <form action="{{ route('categoria.destroy', $cat->id) }}" method="POST"
                                                         class="d-inline">
                                                         @csrf @method('DELETE')
                                                         <button type="submit" class="btn btn-sm btn-outline-danger"

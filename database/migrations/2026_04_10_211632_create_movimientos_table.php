@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ventas', function (Blueprint $table) {
+        Schema::create('movimientos', function (Blueprint $table) {
             $table->id();
-            $table->string('numero_ticket')->unique(); // Ej: V-0001
-            $table->decimal('total', 10, 2);
-            $table->decimal('pago_con', 10, 2); // Para calcular el vuelto
+            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
+            $table->string('tipo');
+            $table->integer('cantidad');
+            $table->decimal('precio_costo',8,2);
+            $table->string('descripcion')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ventas');
+        Schema::dropIfExists('movimientos');
     }
 };

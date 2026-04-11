@@ -95,9 +95,39 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('home.*') ? 'active text-primary' : '' }}"
+                        <a class="nav-link {{ request()->is('home.*') ? 'active' : '' }}"
                             href="{{ route('home.index') }}">
                             <i class="fas fa-home me-1"></i> Detalles
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('compras.*') ? 'active' : '' }}"
+                            href="{{ route('compras.index') }}">
+                            <i class="fas fa-shopping-bag me-1"></i> Compras
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('movimientos.*') ? 'active' : '' }}"
+                            href="{{ route('movimientos.index') }}">
+                            <i class="fas fa-exchange-alt me-1"></i> Movimientos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('proveedor.*') ? 'active' : '' }}"
+                            href="{{ route('proveedor.index') }}">
+                            <i class="fas fa-truck me-1"></i> Proveedores
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link {{ request()->routeIs('gasto.*') ? 'active' : '' }}"
+                            href="{{ route('gastos.index') }}">
+                            <i class="fas fa-money-bill me-1"></i> Gastos
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link {{ request()->routeIs('dato.*') ? 'active' : '' }}"
+                            href="{{ route('datos.index') }}">
+                            <i class="fas fa-cogs me-1"></i> Configuración
                         </a>
                     </li>
                     <li class="nav-item">
@@ -107,7 +137,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('producto.*') ? 'active text-primary' : '' }}"
+                        <a class="nav-link {{ request()->routeIs('producto.*') ? 'active' : '' }}"
                             href="{{ route('producto.index') }}">
                             <i class="fas fa-box me-1"></i> Productos
                         </a>
@@ -119,7 +149,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('lista.*') ? 'active text-primary' : '' }}"
+                        <a class="nav-link {{ request()->routeIs('lista.*') ? 'active' : '' }}"
                             href="{{ route('lista.index') }}">
                             <i class="fas fa-clipboard-list me-1"></i> Inventario
                         </a>

@@ -52,7 +52,7 @@
                                 <td class="ps-4">{{ $p->dni }}</td>
                                 <td class="fw-bold">{{ $p->name }}</td>
                                 <td class="text-center">
-                                    <form action="{{ route('personal.delete', $p->id) }}" method="POST">
+                                    <form action="{{ route('personal.destroy', $p->id) }}" method="POST">
                                         @csrf @method('DELETE')
                                         <button class="btn btn-sm text-danger border-0"><i class="fas fa-trash"></i></button>
                                     </form>

@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('personals', function (Blueprint $table) {
+        Schema::create('compras', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('dni');  
-            $table->integer('estado')->default(1); // 1 para activo, 0 para inactivo
+            $table->foreignId('supplier_id')->constrained('suppliers')->onDelete('cascade');
+            $table->decimal('total',8,2);
+            $table->string('comprobante')->nullable(); // Puede ser 'Boleta', 'Factura', etc.
+            $table->string('numero_comprobante')->nullable(); // Número del comprobante
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('personals');
+        Schema::dropIfExists('compras');
     }
 };

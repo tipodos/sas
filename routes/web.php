@@ -2,46 +2,49 @@
 
 use App\Http\Controllers\ListaController;
 use App\Http\Controllers\PersonalController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\CompraController;
+use App\Http\Controllers\DatoController;
+use App\Http\Controllers\MovimientoController;
+use App\Http\Controllers\GastoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VentaController;
+use App\Models\supplier;
 use App\Models\Venta;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/producto', [ProductoController::class,'index'])->name('producto.index');
-Route::post('/producto/store', [ProductoController::class,'store'])->name('producto.store');
-Route::get('/producto/edit/{id}', [ProductoController::class,'edit'])->name('producto.edit');
-Route::PUT('/producto/update/{id}',[ProductoController::class,'update'])->name('producto.update');
-Route::delete('/producto/delete/{id}', [ProductoController::class,'delete'])->name('producto.delete');
+Route::get('/', function () {
+    return redirect()->route('ventas.index');
+});
 
-Route::get('/categoria', [CategoriaController::class,'index'])->name('categoria.index');
-Route::post('/categoria/store', [categoriaController::class,'store'])->name('categoria.store');
-Route::get('/categoria/edit/{id}', [CategoriaController::class,'edit'])->name('categoria.edit');
-Route::PUT('/categoria/update/{id}',[CategoriaController::class,'update'])->name('categoria.update');
-Route::delete('/categoria/delete/{id}', [CategoriaController::class,'delete'])->name('categoria.delete');
+Route::resource('/producto', Productocontroller::class);
+Route::put('/producto/estado/{id}',[ProductoController::class, 'estado'])->name('producto.estado');
 
-Route::get('/personal', [PersonalController::class,'index'])->name('personal.index');
-Route::post('/personal/store', [PersonalController::class,'store'])->name('personal.store');
-Route::get('/personal/edit/{id}', [PersonalController::class,'edit'])->name('personal.edit');
-Route::PUT('/personal/update/{id}',[PersonalController::class,'update'])->name('personal.update');
-Route::delete('/personal/delete/{id}', [PersonalController::class,'delete'])->name('personal.delete');
+Route::resource('/proveedor', SupplierController::class);
+Route::put('/proveedor/estado/{id}', [SupplierController::class, 'estado'])->name('proveedor.estado');
 
-Route::get('/lista', [ListaController::class,'index'])->name('lista.index');
+Route::resource('/datos', DatoController::class);
 
-Route::get('ventas',[VentaController::class,'index'])->name('ventas.index');
-Route::post('/ventas/store', [VentaController::class,'store'])->name('ventas.store');
+Route::resource('/gastos', GastoController::class);
+
+Route::resource('/compras', CompraController::class);
+
+Route::resource('/movimientos', MovimientoController::class);
+
+Route::resource('/categoria', CategoriaController::class);
+Route::put('/categoria/estado/{id}', [CategoriaController::class, 'estado'])->name('categoria.estado');
+
+Route::resource('/ventas', VentaController::class);
 Route::get('/ventas/ticket/{id}', [VentaController::class, 'generarTicket'])->name('ventas.ticket');
 Route::post('/ventas/anular/{id}', [VentaController::class, 'anular'])->name('ventas.anular');
 
 Route::get('/home',[HomeController::class,'index'])->name('home.index');
 Route::get('/ventas/exportar', [HomeController::class, 'exportarExcel'])->name('ventas.exportar');
 
-Route::get('/', [PersonalController::class,'index'])->name('index');
-Route::post('/store', [PersonalController::class,'store'])->name('store');
-Route::get('/show/{id}', [PersonalController::class,'show'])->name('show');
-Route::PUT('/update/{id}',[PersonalController::class,'update'])->name('update');
-Route::delete('/delete/{id}', [PersonalController::class,'delete'])->name('delete');
+Route::resource('personal', PersonalController::class);
+Route::put('personal/{id}/estado', [PersonalController::class, 'estado'])->name('personal.estado');
 
 Route::get('/lista', [ListaController::class,'index'])->name('lista.index');
 Route::get('orders/export', [ListaController::class, 'export'])->name('orders.export');

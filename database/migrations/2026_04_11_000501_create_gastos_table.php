@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('personals', function (Blueprint $table) {
+        Schema::create('gastos', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('dni');  
-            $table->integer('estado')->default(1); // 1 para activo, 0 para inactivo
+            $table->string('motivo');
+            $table->string('descripcion')->nullable();
+            $table->decimal('monto',8,2);
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('personals');
+        Schema::dropIfExists('gastos');
     }
 };
