@@ -19,11 +19,13 @@ Route::get('/', function () {
     return redirect()->route('ventas.index');
 });
 
+Route::get('/producto/desactivados', [ProductoController::class, 'desactivados'])->name('producto.desactivados');
 Route::resource('/producto', Productocontroller::class);
 Route::put('/producto/estado/{id}',[ProductoController::class, 'estado'])->name('producto.estado');
 
 Route::resource('/proveedor', SupplierController::class);
 Route::put('/proveedor/estado/{id}', [SupplierController::class, 'estado'])->name('proveedor.estado');
+Route::get('proveedores/inactivos', [SupplierController::class, 'inactivos'])->name('proveedor.inactivos');
 
 Route::resource('/datos', DatoController::class);
 
@@ -33,6 +35,7 @@ Route::resource('/compras', CompraController::class);
 
 Route::resource('/movimientos', MovimientoController::class);
 
+Route::get('/categoria/desactivados', [CategoriaController::class, 'desactivados'])->name('categoria.desactivados');
 Route::resource('/categoria', CategoriaController::class);
 Route::put('/categoria/estado/{id}', [CategoriaController::class, 'estado'])->name('categoria.estado');
 
@@ -43,6 +46,7 @@ Route::post('/ventas/anular/{id}', [VentaController::class, 'anular'])->name('ve
 Route::get('/home',[HomeController::class,'index'])->name('home.index');
 Route::get('/ventas/exportar', [HomeController::class, 'exportarExcel'])->name('ventas.exportar');
 
+Route::get('personal/desactivados', [PersonalController::class, 'desactivados'])->name('personal.desactivados');
 Route::resource('personal', PersonalController::class);
 Route::put('personal/{id}/estado', [PersonalController::class, 'estado'])->name('personal.estado');
 

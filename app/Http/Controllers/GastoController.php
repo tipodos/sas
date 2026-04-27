@@ -13,7 +13,7 @@ class GastoController extends Controller
     public function index()
     {
         $gastos = gasto::all();
-        return view('gastos.gasto', compact('gastos'));
+        return view('gastos/gasto', compact('gastos'));
     }
 
     /**
@@ -29,7 +29,18 @@ class GastoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'motivo' => 'required',
+            'descripcion' => 'nullable',
+            'monto' => 'required|numeric',
+        ]);
+
+        $gasto = new gasto();
+        $gasto->motivo = $request->motivo;
+        $gasto->descripcion = $request->descripcion;
+        $gasto->monto = $request->monto;
+        $gasto->save();
+        return redirect()->route('gastos.index')->with('success', 'Gasto registrado exitosamente.');
     }
 
     /**

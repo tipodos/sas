@@ -10,7 +10,7 @@ class CategoriaController extends Controller
 
     public function index()
     {
-        $categorias = Category::latest()->paginate(10);
+        $categorias = Category::where('estado', 1)->latest()->paginate(10)->get();
         return view('categoria/categoria', compact('categorias'));
     }
 
@@ -73,5 +73,17 @@ class CategoriaController extends Controller
 
         $categoria->delete();
         return redirect()->route('categoria.index')->with('success', 'Categoría eliminada correctamente.');
+    }
+    public function estado($id)
+    {
+        $categoria = Category::find($id);
+        $categoria->estado = !$categoria->estado;
+        $categoria->save();
+        return redirect()->route('categoria.index')->with('success', 'Estado de la categoría actualizado exitosamente.');
+    }
+    public function desactivados()
+    {
+        $categorias = Category::where('estado', 0)->get();
+        return view('categoria/desactivado', compact('categorias'));
     }
 }

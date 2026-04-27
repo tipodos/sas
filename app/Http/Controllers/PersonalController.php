@@ -12,7 +12,7 @@ class PersonalController extends Controller
 {
     public function index(){
 
-        $personales= personal::all();
+        $personales= personal::where('estado', 1)->get();
         
 
         return view('personal/personal', compact('personales'));
@@ -39,5 +39,15 @@ class PersonalController extends Controller
         $personal=personal::find($request->id);
         $personal->delete();
         return redirect()->route('personal.index')->with('success', 'Personal eliminado exitosamente.');
+    }
+    public function estado($id){
+        $personal = personal::find($id);
+        $personal->estado = !$personal->estado;
+        $personal->save();
+        return redirect()->route('personal.index')->with('success', 'Estado del personal actualizado exitosamente.');
+    }
+    public function desactivados(){
+        $personal = personal::where('estado', 0)->get();
+        return view('personal/desactivado', compact('personal'));
     }
 }

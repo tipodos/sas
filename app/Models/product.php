@@ -17,4 +17,7 @@ class product extends Model
     public function detalles() {
         return $this->hasMany(saleDatail::class, 'product_id');
     }
+    public function movimientos(){
+        return $this->hasMany(movimiento::class, 'product_id');
+    }
 }

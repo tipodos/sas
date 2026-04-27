@@ -111,7 +111,7 @@
                                                         class="d-inline">
                                                         @csrf @method('PUT')
                                                         <button type="submit" class="btn btn-sm btn-outline-danger"
-                                                            onclick="return confirm('¿Eliminar este producto?')">
+                                                            onclick="return confirm('¿Desactivar este producto?')">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                     </form>

@@ -24,7 +24,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label small text-uppercase fw-bold text-muted">Nombre Completo</label>
-                            <input type="text" name="name" class="form-control" placeholder="Ej: Empresa S.A." value="{{$proveedor->nombre}}" required>
+                            <input type="text" name="nombre" class="form-control" placeholder="Ej: Empresa S.A." value="{{$proveedor->nombre}}" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label small text-uppercase fw-bold text-muted">Telefono</label>

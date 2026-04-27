@@ -69,6 +69,13 @@ class SupplierController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'ruc'=> 'required|unique:suppliers,ruc,'.$id,
+            'nombre' => 'required',
+            'telefono' => 'max:9|nullable',
+            'direccion' => 'max:255|nullable'
+        ]);
+
         $proveedor = supplier::findorfail($id);
         $proveedor->ruc = $request->ruc;
         $proveedor->nombre = $request->nombre;
@@ -93,4 +100,10 @@ class SupplierController extends Controller
         $p->save();
         return redirect()->route('proveedor.index');
     }
+    public function inactivos()
+{
+    // Solo traemos los que el dueño ocultó
+    $proveedores = supplier::where('estado', 0)->get();
+    return view('proveedor.desactivado', compact('proveedores'));
+}
 }

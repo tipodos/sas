@@ -60,9 +60,9 @@
                                                         class="btn btn-sm btn-outline-success">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <form action="{{ route('categoria.destroy', $cat->id) }}" method="POST"
+                                                    <form action="{{ route('categoria.estado', $cat->id) }}" method="POST"
                                                         class="d-inline">
-                                                        @csrf @method('DELETE')
+                                                        @csrf @method('PUT')
                                                         <button type="submit" class="btn btn-sm btn-outline-danger"
                                                             onclick="return confirm('¿Eliminar esta categoría?')">
                                                             <i class="fas fa-trash"></i>

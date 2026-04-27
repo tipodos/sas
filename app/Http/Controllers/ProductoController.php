@@ -12,10 +12,14 @@ class ProductoController extends Controller
     public function index()
     {
 
-        $producto = product::latest()->paginate(10);
+        $producto = product::where('visible', true)->latest()->paginate(10);
         $categorias = category::all();
 
         return view('products/index', compact('producto', 'categorias'));
+    }
+    public function create()
+    {
+        //
     }
     public function store(Request $request)
     {
@@ -55,6 +59,10 @@ class ProductoController extends Controller
 
         return redirect()->route('producto.index')->with('success', 'Producto actualizado exitosamente.');
     }
+    Public function show($id)
+    {
+        //
+    }
     public function delete(Request $request)
     {
         try {
@@ -70,5 +78,18 @@ class ProductoController extends Controller
             // Por si pasa cualquier otra cosa rara
             return redirect()->route('producto.index')->with('error', 'No se pudo eliminar el producto.');
         }
+    }
+    public function estado($id)
+    {
+        $producto = product::findOrFail($id);
+        $producto->visible = !$producto->visible; // Cambia el estado al opuesto
+        $producto->save();
+
+        return redirect()->route('producto.index')->with('success', 'Estado del producto actualizado exitosamente.');
+    }
+    public function desactivados()
+    {
+        $productos = product::where('visible', false)->latest()->paginate(10);
+        return view('products/desactivado', compact('productos'));
     }
 }
